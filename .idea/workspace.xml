@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d7c6e27b-e82a-4e1f-b02a-4d879a593ab6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/back/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/Filters/HttpFilter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/Filters/JwtSecurityFilter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/Web4Application.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/configurations/AuthConfiguration.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/configurations/LoggerConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/configurations/WebConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/controllers/AuthController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/controllers/PointsController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/exceptionHandler/GlobalExceptionHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/models/Point.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/models/User$Roles.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/models/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/repositories/PointRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/repositories/UserRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/services/AreaChecker.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/services/AuthService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/services/JwtUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/services/PointsService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/classes/itmo/lab/web4/services/Validator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/maven-archiver/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/web4-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/target/web4-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/web4.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/Web4Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/configurations/AuthConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/configurations/LoggerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/configurations/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/controllers/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/controllers/PointsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/exceptionHandler/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/filters/HttpFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/filters/JwtSecurityFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/models/Point.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/models/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/repositories/PointRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/repositories/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/services/AreaChecker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/services/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/services/JwtUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/services/PointsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/itmo/lab/web4/services/Validator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2vLcUGe8VwT8uxtxRknNiNIHaeV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/labs/Опи/OpiLab3&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\labs\Опи\OpiLab3" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="OpiLab3" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="OpiLab3" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.387" />
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.387" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d7c6e27b-e82a-4e1f-b02a-4d879a593ab6" name="Changes" comment="" />
+      <created>1743927808727</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1743927808727</updated>
+      <workItem from="1743927809729" duration="61000" />
+      <workItem from="1743927885034" duration="1782000" />
+      <workItem from="1743929700451" duration="881000" />
+      <workItem from="1743930605258" duration="437000" />
+      <workItem from="1743931055391" duration="145000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
