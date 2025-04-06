@@ -151,7 +151,36 @@
 
 
 
-    <target name="team"/>
+    <target name="team">
+        <mkdir dir="revisions"/>
+        <exec executable="svn" failonerror="true">
+            <arg value="checkout"/>
+            <arg value="--revision"/>
+            <arg value="HEAD-1"/>
+            <arg value=""/>
+            <arg value="revisions/revision1"/>
+        </exec>
+        <exec executable="svn" failonerror="true">
+            <arg value="checkout"/>
+            <arg value="--revision"/>
+            <arg value="HEAD-2"/>
+            <arg value=""/>
+            <arg value="revisions/revision2"/>
+        </exec>
+
+
+        <ant antfile="revisions/revision1/build.xml" target="build"/>
+
+
+        <ant antfile="revisions/revision2/build.xml" target="build"/>
+
+
+        <mkdir dir="dist"/>
+        <zip destfile="dist/revisions.zip">
+            <fileset dir="revisions/revision1/build" includes="**/*.jar"/>
+            <fileset dir="revisions/revision2/build" includes="**/*.jar"/>
+        </zip>
+    </target>
 
     <target name="env"/>
 
