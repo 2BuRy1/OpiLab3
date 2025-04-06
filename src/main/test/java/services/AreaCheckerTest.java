@@ -2,47 +2,34 @@ package services;
 
 import itmo.lab.web4.models.Point;
 import itmo.lab.web4.services.AreaChecker;
-import itmo.lab.web4.services.PointsService;
-import org.checkerframework.checker.units.qual.A;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class AreaCheckerTest {
 
+    private AreaChecker areaChecker;
 
-    AreaChecker areaChecker;
-
-
-    @BeforeEach
-    void init(){
-     areaChecker =new AreaChecker();
+    @Before
+    public void setUp() {
+        areaChecker = new AreaChecker();
     }
 
-
     @Test
-    void checkIfInTheSpot(){
+    public void checkIfInTheSpot() {
         Point point = new Point();
         point.setX(-1);
         point.setY(0.5);
         point.setR(1);
-        Assertions.assertTrue(areaChecker.isInTheSpot(point));
-
+        assertTrue(areaChecker.isInTheSpot(point));
     }
 
-
     @Test
-    void checkIfNotInTheSpot(){
+    public void checkIfNotInTheSpot() {
         Point point = new Point();
         point.setX(-0.1);
         point.setY(2);
         point.setR(2);
-        Assertions.assertFalse(areaChecker.isInTheSpot(point));
-
+        assertFalse(areaChecker.isInTheSpot(point));
     }
-
-
-
 }
