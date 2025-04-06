@@ -126,8 +126,33 @@
         </java>
     </target>
 
+    <target name="alt" depends="compile" description="Creates alternative version with renamed classes">
+        <property name="alt.src.dir" value="${build}/alt-src"/>
+        <mkdir dir="${alt.src.dir}"/>
+
+        <copy todir="${alt.src.dir}">
+            <fileset dir="${src}"/>
+        </copy>
+
+
+
+        <replaceregexp match="${alt.user.regex}" replace="${alt.user}" flags="">
+            <fileset dir="${alt.src.dir}" includes="**/*.java"/>
+        </replaceregexp>
+
+        <antcall target="build">
+            <param name="src" value="${alt.src.dir}"/>
+            <param name="build.classes" value="${build}/alt-classes"/>
+            <param name="dest.file" value="alt-${dest.file}"/>
+        </antcall>
+
+        <echo message="Alternative version built: alt-${dest.file}"/>
+    </target>
+
+
+
     <target name="team"/>
-    <target name="alt"/>
+
     <target name="env"/>
 
 </project>
