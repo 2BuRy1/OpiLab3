@@ -89,7 +89,13 @@
         </junit>
     </target>
 
-    <target name="native2ascii"/>
+    <target name="native2ascii">
+        <delete dir="${native2ascii.resources}"/>
+        <native2ascii src="${resources.dir}"
+                      dest="${native2ascii.resources}"
+                      includes="**/*.properties"/>
+    </target>
+
     <target name="music"/>
     <target name="team"/>
     <target name="alt"/>
