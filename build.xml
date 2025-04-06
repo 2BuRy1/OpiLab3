@@ -1,28 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name = "lab4" default="compile">
+<project name="lab4" default="build">
 
     <property file="build.properties"/>
+    <property name="lib.dir" value="${target.dependency}"/>
+    <property name="fatlib.dir" value="${build}/fatlib"/>
+
+    <path id="project.classpath">
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
 
     <target name="init">
-        <mkdir dir="${build}" />
+        <exec executable="mvn" failonerror="true">
+            <arg value="dependency:copy-dependencies"/>
+        </exec>
+
+        <mkdir dir="${build}"/>
         <mkdir dir="${build.classes}"/>
     </target>
 
-
-
-
     <target name="compile" depends="init">
-            <javac
+        <javac
                 srcdir="${src}"
                 destdir="${build.classes}"
-                />
+                classpathref="project.classpath"
+                nowarn="on"
+        />
+
+        <copy todir="${build.classes}">
+            <fileset dir="src/main/resources"/>
+        </copy>
     </target>
 
+    <target name="build" depends="compile">
+        <mkdir dir="${fatlib.dir}"/>
+        <unzip dest="${fatlib.dir}">
+            <fileset dir="${lib.dir}" includes="*.jar"/>
+        </unzip>
 
+        <jar destfile="${dest.file}">
+            <fileset dir="${build.classes}"/>
+            <fileset dir="${fatlib.dir}"/>
+            <manifest>
+                <attribute name="Main-Class" value="itmo.lab.web4.Web4Application"/>
+            </manifest>
+        </jar>
+    </target>
 
-    <target name="build"/>
-    <target name="clean"/>
+    <target name="clean">
+        <delete dir="${build}"/>
+    </target>
+
     <target name="test"/>
     <target name="xml"/>
     <target name="native2ascii"/>
