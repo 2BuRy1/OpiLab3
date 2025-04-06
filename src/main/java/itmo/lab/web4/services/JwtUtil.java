@@ -17,8 +17,7 @@ import java.util.Map;
 
 @Service
 public class JwtUtil {
-    @Value("${jwt.secret}")
-    private String secretKey;
+    private String secretKey = "ahjsvdjhasvdhjabsdasbghdjgashjdbashjdgashjdgashjdbasjhdgashjdg";
 
 
 

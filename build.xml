@@ -15,15 +15,14 @@
 
 
     <target name="init">
-        <exec executable="mvn" failonerror="true">
+        <exec executable="mvn" failonerror="false">
             <arg value="dependency:copy-dependencies"/>
         </exec>
-
         <mkdir dir="${build}"/>
         <mkdir dir="${build.classes}"/>
     </target>
 
-    <target name="compile" depends="init">
+    <target name="compile" depends="init" >
         <javac
                 srcdir="${src}"
                 destdir="${build.classes}"
@@ -31,15 +30,15 @@
                 nowarn="on"
         />
 
-        <copy todir="${build.classes}">
+        <copy todir="${build.classes}" failonerror="false">
             <fileset dir="src/main/resources"/>
         </copy>
     </target>
 
-    <target name="build" depends="compile, xml">
+    <target name="build" depends="compile">
         <mkdir dir="${fatlib.dir}"/>
-        <unzip dest="${fatlib.dir}">
-            <fileset dir="${lib.dir}" includes="*.jar"/>
+        <unzip dest="${fatlib.dir}" failonemptyarchive="false">
+            <fileset dir="${lib.dir}" includes="*.jar" />
         </unzip>
 
         <jar destfile="${dest.file}">
@@ -54,10 +53,13 @@
     <target name="clean">
         <delete dir="${build}"/>
         <delete dir="${target}"/>
+        <delete dir="dist"/>
+        <delete dir="revisions"/>
+        <delete dir="alt-."/>
     </target>
 
     <target name="xml">
-        <xmlvalidate file="pom.xml" lenient="yes"/>
+        <xmlvalidate file="pom.xml" lenient="yes" failonerror="false"/>
     </target>
 
 
@@ -127,7 +129,6 @@
     </target>
 
     <target name="alt" depends="compile" description="Creates alternative version with renamed classes">
-        <property name="alt.src.dir" value="${build}/alt-src"/>
         <mkdir dir="${alt.src.dir}"/>
 
         <copy todir="${alt.src.dir}">
@@ -150,36 +151,56 @@
     </target>
 
 
+    <target name="team" >
+     <delete dir="${revisions.dir}"/>
+        <mkdir dir="${revisions.dir}"/>
 
-    <target name="team">
-        <mkdir dir="revisions"/>
-        <exec executable="svn" failonerror="true">
-            <arg value="checkout"/>
-            <arg value="--revision"/>
-            <arg value="HEAD-1"/>
-            <arg value=""/>
-            <arg value="revisions/revision1"/>
-        </exec>
-        <exec executable="svn" failonerror="true">
-            <arg value="checkout"/>
-            <arg value="--revision"/>
-            <arg value="HEAD-2"/>
-            <arg value=""/>
-            <arg value="revisions/revision2"/>
-        </exec>
-
-
-        <ant antfile="revisions/revision1/build.xml" target="build"/>
-
-
-        <ant antfile="revisions/revision2/build.xml" target="build"/>
+        <mkdir dir="${revisions.dir.revision1.libs}"/>
+        <mkdir dir="${revisions.dir.revision2.libs}"/>
 
 
         <mkdir dir="dist"/>
-        <zip destfile="dist/revisions.zip">
-            <fileset dir="revisions/revision1/build" includes="**/*.jar"/>
-            <fileset dir="revisions/revision2/build" includes="**/*.jar"/>
+
+        <exec executable="svn" failonerror="true">
+            <arg value="checkout"/>
+            <arg value="--revision"/>
+            <arg value="1"/>
+            <arg value="${local.svn.repo}"/>
+            <arg value="${revisions.dir.revision1.src}"/>
+        </exec>
+
+        <exec executable="svn" failonerror="true">
+            <arg value="checkout"/>
+            <arg value="--revision"/>
+            <arg value="2"/>
+            <arg value="${local.svn.repo}"/>
+            <arg value="${revisions.dir.revision2.src}"/>
+        </exec>
+
+        <exec executable="cp">
+            <arg value="build.xml"/>
+            <arg value="${revisions.dir.revision1}"/>
+        </exec>
+
+        <exec executable="cp">
+            <arg value="build.xml"/>
+            <arg value="${revisions.dir.revision2}"/>
+        </exec>
+
+        <ant antfile="build.xml" dir="${revisions.dir.revision1}" target="build">
+            <property name="dest.file" value="first${dest.file}"/>
+        </ant>
+        <ant antfile="build.xml" dir="${revisions.dir.revision2}" target="build">
+            <property name="dest.file" value="second${dest.file}"/>
+        </ant>
+
+
+        <zip destfile="${output.zip}">
+            <fileset dir="${revisions.dir.revision1}" includes="*.jar"/>
+            <fileset dir="${revisions.dir.revision2}" includes="*.jar"/>
         </zip>
+
+        <echo message="Локальные ревизии упакованы в: ${output.zip}"/>
     </target>
 
     <target name="env"/>

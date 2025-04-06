@@ -5,7 +5,7 @@
  <parent>
    <groupId>org.springframework.boot</groupId>
    <artifactId>spring-boot-starter-parent</artifactId>
-   <version>3.3.5</version>
+   <version>3.3.0</version>
    <relativePath/>
  </parent>
  <groupId>itmo.lab</groupId>
@@ -29,91 +29,69 @@
  <properties>
    <java.version>17</java.version>
  </properties>
- <dependencies>
-   <dependency>
-     <groupId>org.springframework.boot</groupId>
-     <artifactId>spring-boot-starter-data-jpa</artifactId>
-   </dependency>
+    <dependencies>
+        <!-- Spring Boot Starters -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- Database -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- JJWT -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
 
 
-
-   <dependency>
-     <groupId>org.springframework.boot</groupId>
-     <artifactId>spring-boot-starter-security</artifactId>
-   </dependency>
-   <dependency>
-     <groupId>org.springframework.boot</groupId>
-     <artifactId>spring-boot-starter-web</artifactId>
-   </dependency>
-
-   <dependency>
-     <groupId>org.springframework.security</groupId>
-     <artifactId>spring-security-test</artifactId>
-     <scope>test</scope>
-   </dependency>
-
-   <dependency>
-     <groupId>org.springframework.boot</groupId>
-     <artifactId>spring-boot-starter</artifactId>
-     <version>3.3.5</version>
-   </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+        </dependency>
 
 
-   <dependency>
-     <groupId>org.postgresql</groupId>
-     <artifactId>postgresql</artifactId>
-     <version>42.7.4</version>
-   </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.11.5</version>
+        </dependency>
 
 
-   <dependency>
-     <groupId>io.jsonwebtoken</groupId>
-     <artifactId>jjwt-api</artifactId>
-     <version>0.11.5</version>
-   </dependency>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
 
-
-   <dependency>
-     <groupId>io.jsonwebtoken</groupId>
-     <artifactId>jjwt-impl</artifactId>
-     <version>0.11.5</version>
-   </dependency>
-
-
-   <dependency>
-     <groupId>io.jsonwebtoken</groupId>
-     <artifactId>jjwt-jackson</artifactId>
-     <version>0.11.5</version>
-   </dependency>
-
-   <dependency>
-     <groupId>org.projectlombok</groupId>
-     <artifactId>lombok</artifactId>
-     <version>1.18.30</version>
-     <scope>provided</scope>
-   </dependency>
-
-   <dependency>
-     <groupId>org.junit.jupiter</groupId>
-     <artifactId>junit-jupiter-engine</artifactId>
-     <version>5.10.2</version>
-     <scope>test</scope>
-   </dependency>
-   <dependency>
-     <groupId>org.mockito</groupId>
-     <artifactId>mockito-core</artifactId>
-     <version>5.11.0</version>
-     <scope>test</scope>
-   </dependency>
-
-   <dependency>
-     <groupId>org.mockito</groupId>
-     <artifactId>mockito-junit-jupiter</artifactId>
-     <version>5.11.0</version> <!-- Версия должна соответствовать mockito-core -->
-     <scope>test</scope>
-   </dependency>
- </dependencies>
-
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 
  <build>
