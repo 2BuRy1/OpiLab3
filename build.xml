@@ -34,7 +34,7 @@
         </copy>
     </target>
 
-    <target name="build" depends="compile">
+    <target name="build" depends="compile, xml">
         <mkdir dir="${fatlib.dir}"/>
         <unzip dest="${fatlib.dir}">
             <fileset dir="${lib.dir}" includes="*.jar"/>
@@ -54,7 +54,11 @@
     </target>
 
     <target name="test"/>
-    <target name="xml"/>
+
+    <target name="xml">
+        <xmlvalidate file="pom.xml" lenient="yes"/>
+    </target>
+
     <target name="native2ascii"/>
     <target name="music"/>
     <target name="team"/>
