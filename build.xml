@@ -116,7 +116,16 @@
                       includes="**/*.properties"/>
     </target>
 
-    <target name="music"/>
+    <target name="music" depends="build">
+        <java classname="MusicPlayer" fork="true">
+            <classpath>
+                <path refid="project.classpath"/>
+                <pathelement path="${build.classes}"/>
+            </classpath>
+            <arg value="${src}/gaiti.wav"/>
+        </java>
+    </target>
+
     <target name="team"/>
     <target name="alt"/>
     <target name="env"/>
