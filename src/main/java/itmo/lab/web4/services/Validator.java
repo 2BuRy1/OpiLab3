@@ -12,9 +12,8 @@ import java.util.logging.Logger;
 @Component
 public class Validator {
 
-@Autowired
-private Logger logger;
-    public boolean validate(Point point) throws BadRequestException {
+
+    public boolean validate(Point point) {
 
         return (validateX(point) && validateY(point) && validateR(point));
 

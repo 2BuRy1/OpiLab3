@@ -33,7 +33,7 @@ public class AuthService {
     private AuthenticationManager authenticationManager;
 
 
-    public String register(User newUser) throws BadRequestException {
+    public String register(User newUser)  {
 
         if(userRepository.existsByUsername(newUser.getUsername())) throw new BadCredentialsException("Username is already in use");
 

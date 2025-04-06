@@ -33,7 +33,7 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<Map<String, String>> register(@RequestBody User user) throws BadRequestException {
+    public ResponseEntity<Map<String, String>> register(@RequestBody User user) {
 
         String token = authService.register(user);
 

@@ -8,8 +8,6 @@ public class AreaChecker {
 
 
 
-
-
     public boolean isInTheSpot(Point point){
         return (checkIsCircle(point) || checkIsTriangle(point) || checkIsRectangle(point));
     }
