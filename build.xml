@@ -53,8 +53,8 @@
     <target name="clean">
         <delete dir="${build}"/>
         <delete dir="${target}"/>
-        <delete dir="dist"/>
-        <delete dir="revisions"/>
+        <delete dir="${dist}"/>
+        <delete dir="${revisions.dir}"/>
         <delete dir="alt-."/>
     </target>
 
@@ -203,6 +203,29 @@
         <echo message="Локальные ревизии упакованы в: ${output.zip}"/>
     </target>
 
-    <target name="env"/>
+    <target name="env" depends="build" description="Build and run the program in alternative environments">
+        <available file="env.properties" property="env.file.exists"/>
+        <fail unless="env.file.exists" message="Environment config file 'env.properties' not found"/>
+
+        <property file="env.properties"/>
+
+
+
+
+
+        <echo message="Running with Java: ${java.executable} and JVM args: ${jvm.args}"/>
+
+        <java classname="${main.class}" fork="true" jvm="${java.executable}">
+            <jvmarg line="${jvm.args}"/>
+            <classpath>
+                <path refid="project.classpath"/>
+                <pathelement path="${dest.file}"/>
+            </classpath>
+            <arg line="${args}"/>
+
+
+
+        </java>
+    </target>
 
 </project>
