@@ -25,11 +25,10 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
     implementation("org.projectlombok:lombok:+")
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.4")
-    testImplementation('junit:junit:4.13.1')
-    testImplementation("org.mockito:mockito-core:+")
-}
+    testImplementation("junit:junit:4.13.2")
 
-tasks.register("compile"){
+
+    tasks.register("compile"){
     dependsOn(classes)
 }
 
