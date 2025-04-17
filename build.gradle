@@ -100,4 +100,30 @@ tasks.register('xml') {
         }
         println "All XML files are valid"
     }
+
+
 }
+
+
+tasks.register('alt') {
+    doLast {
+        def sourceDir = file("src/main/java")
+
+        fileTree(sourceDir).matching {
+            include '**/*.java'
+        }.each { file ->
+            def text = file.text
+
+            text = text.replaceAll('Bearer ', 'Meower')
+
+            file.write(text)
+        }
+    }
+    tasks.alt.finalizedBy(tasks.build.configure {
+        tasks.'jar'.archiveFileName = 'alt.jar'
+    })
+}
+
+
+
+
