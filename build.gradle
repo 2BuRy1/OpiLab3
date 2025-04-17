@@ -1,5 +1,3 @@
-
-
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.4'
@@ -44,30 +42,22 @@ tasks.register("team", Exec){
 tasks.register('playMusic', JavaExec) {
     group = 'custom'
     description = 'Play music using MusicPlayer class'
-
     classpath = sourceSets.main.runtimeClasspath
     mainClass.set('itmo.lab.web4.music.MusicPlayer') 
     args = ['src/main/resources/gaiti.wav'] 
 }
 
-
-
 tasks.register('native2ascii') {
     inputs.dir("src/main/resources")
     outputs.dir(layout.buildDirectory.dir("asciiResources"))
-
     doLast {
         def inputDir = file("src/main/resources")
         def outputDir = new File("${project.buildDir}/asciiResources")
-
         println "Converting .properties files from ${inputDir}..."
-
         fileTree(inputDir).matching { include '**/*.properties' }.each { inputFile ->
             def relativePath = inputDir.toPath().relativize(inputFile.toPath()).toString()
             def outputFile = new File(outputDir, relativePath)
-
             outputFile.parentFile.mkdirs()
-
             outputFile.withWriter('ASCII') { writer ->
                 inputFile.eachLine { line ->
                     def convertedLine = line.collect { ch ->
@@ -76,10 +66,40 @@ tasks.register('native2ascii') {
                     writer.writeLine(convertedLine)
                 }
             }
-
             println "${inputFile.name} -> ${outputFile.name}"
         }
-
         println "Output dir: ${outputDir}"
+    }
+}
+
+import javax.xml.parsers.DocumentBuilderFactory
+import org.xml.sax.SAXException
+tasks.register('xml') {
+    group = 'verification'
+    description = 'Validates all XML files in the entire project directory for well-formedness'
+    def projectRoot = project.projectDir
+    inputs.dir(projectRoot)
+    doLast {
+        def factory = DocumentBuilderFactory.newInstance()
+        def parser = factory.newDocumentBuilder()
+        println "Validating all XML files in ${projectRoot}..."
+        def invalidFiles = []
+        fileTree(projectRoot).matching { include '**/*.xml' }.each { file ->
+            def relativePath = file.absolutePath.replace(projectRoot.absolutePath + File.separator, "")
+            try {
+                parser.parse(file)
+                println "Valid XML: ${relativePath}"
+            } catch (SAXException e) {
+                println "Invalid XML: ${relativePath} - ${e.message}"
+                invalidFiles << file
+            } catch (Exception e) {
+                println "Error reading file: ${relativePath} - ${e.message}"
+                invalidFiles << file
+            }
+        }
+        if (!invalidFiles.isEmpty()) {
+            throw new GradleException("XML validation failed for ${invalidFiles.size()} file(s).")
+        }
+        println "All XML files are valid!"
     }
 }
