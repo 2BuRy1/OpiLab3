@@ -101,3 +101,28 @@ tasks.register('xml') {
         println "All XML files are valid"
     }
 }
+
+tasks.register('env', Jar) {
+    group = 'build'
+    description = 'Build the JAR with custom environment settings from env.properties'
+    def envFile = file("env.properties")
+    if (!envFile.exists()) {
+        throw new GradleException("Environment config file 'env.properties' not found")
+    }
+    def props = new Properties()
+    envFile.withInputStream { props.load(it) }
+    def mainClassName = props.getProperty("main.class")
+    if (!mainClassName) {
+        throw new GradleException("'main.class' is missing in env.properties")
+    }
+    println "Main Class: ${mainClassName}"
+    archiveBaseName.set('Mama.jar')
+    from sourceSets.main.output  
+    manifest {
+        attributes(
+            'Main-Class': mainClassName 
+        )
+    }
+}
+
+build.dependsOn bootJar
