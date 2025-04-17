@@ -75,8 +75,6 @@ tasks.register('native2ascii') {
 import javax.xml.parsers.DocumentBuilderFactory
 import org.xml.sax.SAXException
 tasks.register('xml') {
-    group = 'verification'
-    description = 'Validates all XML files in the entire project directory for well-formedness'
     def projectRoot = project.projectDir
     inputs.dir(projectRoot)
     doLast {
