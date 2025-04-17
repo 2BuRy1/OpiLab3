@@ -27,7 +27,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.4")
     testImplementation("junit:junit:4.13.2")
 
-
+}
     tasks.register("compile"){
     dependsOn(classes)
 }
@@ -122,6 +122,32 @@ tasks.register('alt') {
         tasks.'jar'.archiveFileName = 'alt.jar'
     })
 }
+
+
+
+tasks.register('env', Jar) {
+    group = 'build'
+    description = 'Build the JAR with custom environment settings from env.properties'
+    def envFile = file("env.properties")
+    if (!envFile.exists()) {
+        throw new GradleException("Environment config file 'env.properties' not found")
+    }
+    def props = new Properties()
+    envFile.withInputStream { props.load(it) }
+    def mainClassName = props.getProperty("main.class")
+    if (!mainClassName) {
+        throw new GradleException("'main.class' is missing in env.properties")
+    }
+    println "Main Class: ${mainClassName}"
+    archiveBaseName.set('Mama')
+    from sourceSets.main.output
+    manifest {
+        attributes(
+                'Main-Class': mainClassName
+        )
+    }
+}
+build.dependsOn bootJar
 
 
 
