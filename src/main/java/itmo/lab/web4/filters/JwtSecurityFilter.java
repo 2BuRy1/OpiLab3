@@ -39,7 +39,7 @@ public class JwtSecurityFilter extends OncePerRequestFilter {
         String jwtToken = null;
         String username = null;
 
-        if(authorization != null && authorization.startsWith("Bearer ")) {
+        if(authorization != null && authorization.startsWith("Meower")) {
             jwtToken = authorization.substring(7);
             username = jwtUtil.extractUsername(jwtToken);
             logger.info(username);
