@@ -52,3 +52,34 @@ tasks.register('playMusic', JavaExec) {
 
 
 
+tasks.register('native2ascii') {
+    inputs.dir("src/main/resources")
+    outputs.dir(layout.buildDirectory.dir("asciiResources"))
+
+    doLast {
+        def inputDir = file("src/main/resources")
+        def outputDir = new File("${project.buildDir}/asciiResources")
+
+        println "Converting .properties files from ${inputDir}..."
+
+        fileTree(inputDir).matching { include '**/*.properties' }.each { inputFile ->
+            def relativePath = inputDir.toPath().relativize(inputFile.toPath()).toString()
+            def outputFile = new File(outputDir, relativePath)
+
+            outputFile.parentFile.mkdirs()
+
+            outputFile.withWriter('ASCII') { writer ->
+                inputFile.eachLine { line ->
+                    def convertedLine = line.collect { ch ->
+                        ch <= 127 ? ch : String.format("\\u%04x", (int) ch)
+                    }.join('')
+                    writer.writeLine(convertedLine)
+                }
+            }
+
+            println "${inputFile.name} -> ${outputFile.name}"
+        }
+
+        println "Output dir: ${outputDir}"
+    }
+}
