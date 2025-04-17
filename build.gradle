@@ -28,4 +28,12 @@ dependencies {
     testImplementation("org.mockito:mockito-core:+")
 }
 
+tasks.register("compile").configure {
+    dependsOn(classes)
+}
+
+
+
+
+
 
