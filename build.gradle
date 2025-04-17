@@ -10,6 +10,8 @@ repositories {
     mavenCentral()
 }
 
+sourceSets.main.resources.srcDirs = ['src/main/resources']
+
 java{
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
@@ -32,8 +34,14 @@ tasks.register("compile").configure {
     dependsOn(classes)
 }
 
+tasks.register('playMusic', JavaExec) {
+    group = 'custom'
+    description = 'Play music using MusicPlayer class'
 
-
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass.set('itmo.lab.web4.music.MusicPlayer') 
+    args = ['src/main/resources/gaiti.wav'] 
+}
 
 
 
