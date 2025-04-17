@@ -32,11 +32,7 @@ dependencies {
     dependsOn(classes)
 }
 
-tasks.register("team", Exec){
-    commandLine "echo", 'mamashka'
 
-
-}
 
 tasks.register('playMusic', JavaExec) {
     group = 'custom'
@@ -128,9 +124,13 @@ tasks.register('alt') {
 tasks.register('env', Jar) {
     group = 'build'
     description = 'Build the JAR with custom environment settings from env.properties'
+
+
+
+
     def envFile = file("env.properties")
-    if (!envFile.exists()) {
-        throw new GradleException("Environment config file 'env.properties' not found")
+    onlyIf {
+        file("env.properties").exists()
     }
     def props = new Properties()
     envFile.withInputStream { props.load(it) }
@@ -156,9 +156,139 @@ tasks.register('env', Jar) {
 
 
 
+tasks.register('mkRevDir').configure {
+    mkdir("${revisionsDirRevision1Src}")
+    mkdir("${revisionsDirRevision2Src}")
+    mkdir("${dist}")
+}
 
 
-build.dependsOn bootJar
+
+tasks.register('loadRev1', Exec){
+    commandLine 'svn', 'checkout', '--revision', '3', "${localSvnRepo}/branches/first_branch", "${revisionsDirRevision1Src}"
+
+}
+
+tasks.register('loadRev2', Exec) {
+    commandLine 'svn', 'checkout', '--revision', '4', "${localSvnRepo}/branches/first_branch", "${revisionsDirRevision2Src}"
+
+}
+
+
+tasks.register('loadRevs'){
+    dependsOn(loadRev1, loadRev2)
+}
+
+
+tasks.register('buildRev1', Exec) {
+    dependsOn loadRev1
+    workingDir revisionsDirRevision1Src
+    commandLine "${rootProject.projectDir}/gradlew", 'jar'
+
+    doFirst {
+
+        copy {
+            from "${rootProject.projectDir}/build.gradle"
+            into workingDir
+        }
+
+        copy {
+            from "${rootProject.projectDir}/settings.gradle"
+            into workingDir
+        }
+
+        def envFile = new File("${workingDir}/env.properties")
+        if (!envFile.exists()) {
+            envFile.createNewFile()
+            envFile.text = """
+main.class=A
+"""
+        }
+    }
+}
+tasks.register('buildRev2', Exec) {
+    dependsOn loadRev2
+    workingDir revisionsDirRevision2Src
+    commandLine "${rootProject.projectDir}/gradlew", 'jar'
+
+
+    doFirst {
+        copy {
+            from "${rootProject.projectDir}/build.gradle"
+            into workingDir
+        }
+
+        copy {
+            from "${rootProject.projectDir}/settings.gradle"
+            into workingDir
+        }
+
+
+    }
+
+    def envFile = new File("${workingDir}/env.properties")
+    if (!envFile.exists()) {
+        envFile.createNewFile()
+        envFile.text = """
+main.class=A
+"""
+
+    }
+}
+
+
+
+tasks.register('packageRevs', Zip) {
+    dependsOn(tasks.buildRev1, tasks.buildRev2)
+
+    archiveFileName = "revisions_archive.zip"
+    destinationDirectory = file("${dist}")
+
+    from("${revisionsDirRevision1Src}/build/libs") {
+        include '*.jar'
+        rename { "revision1_${it}" }
+    }
+
+    from("${revisionsDirRevision2Src}/build/libs") {
+        include '*.jar'
+        rename { "revision2_${it}" }
+    }
+
+    doLast {
+        println "ZIP-архив с ревизиями создан: ${archiveFile.get()}"
+    }
+}
+
+tasks.register('team') {
+    dependsOn(tasks.mkRevDir, tasks.loadRevs, tasks.packageRevs)
+
+    doLast {
+        def zipFile = file("dist/revisions_archive.zip")
+        if (zipFile.exists()) {
+            println "Сборка завершена. Результаты:"
+            println "1. JAR ревизии 1: ${revisionsDirRevision1Src}/build/libs/*.jar"
+            println "2. JAR ревизии 2: ${revisionsDirRevision2Src}/build/libs/*.jar"
+            println "3. ZIP архив: ${zipFile.absolutePath}"
+        } else {
+            throw new GradleException("Не удалось создать ZIP архив с ревизиями")
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+tasks.named('build'){
+    dependsOn(tasks.bootJar)
+}
 
 
 
