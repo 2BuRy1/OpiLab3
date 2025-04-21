@@ -291,5 +291,8 @@ tasks.named('build'){
 }
 
 
-
-
+clean.doFirst {
+    delete "${revisionsDir}"
+    delete "./build"
+    delete "${dist}"
+}
