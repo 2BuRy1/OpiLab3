@@ -4,6 +4,7 @@ import itmo.lab.web4.models.Point;
 import itmo.lab.web4.services.AreaChecker;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class AreaCheckerTest {
@@ -15,6 +16,7 @@ public class AreaCheckerTest {
         areaChecker = new AreaChecker();
     }
 
+
     @Test
     public void checkIfInTheSpot() {
         Point point = new Point();
@@ -23,6 +25,7 @@ public class AreaCheckerTest {
         point.setR(1);
         assertTrue(areaChecker.isInTheSpot(point));
     }
+
 
     @Test
     public void checkIfNotInTheSpot() {
